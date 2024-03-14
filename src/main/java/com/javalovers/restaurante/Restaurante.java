@@ -1,17 +1,11 @@
 package com.javalovers.restaurante;
 import java.util.Scanner;
+import people.User;
+import values.UserTypes;
 public class Restaurante {
 
     public static void main(String[] args) {
-        int salir = 1;
-        Scanner scanner = new Scanner(System.in);
-        while(salir==1){
-            System.out.println("usted que tipo de persona es?");
-            String person = scanner.next();
-            switch(person){
-                case "estudiante":
-            }
-            
-        }
+        User student = new User(UserTypes.STUDENT, "Fulanito","241873");
+        student.sell();
     }
 }
