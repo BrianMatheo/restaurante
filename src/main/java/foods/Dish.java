@@ -17,6 +17,7 @@ public class Dish {
     }
     @Override
     public String toString() {
-        return "Name: " + name + ", Type: " + type + ", Stock: " + stock + ", Price: " + price + ", Variation: " + variation;
+        return "Name: " + name + ", Price: " + price;
     }
+    
 }

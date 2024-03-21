@@ -1,15 +1,20 @@
 package people;
 import values.UserTypes;
 import java.util.Scanner;
+import foods.Dish;
+import values.DishTypes;
 public class User {
     Scanner scanner = new Scanner(System.in);
-    private UserTypes types;
+    private UserTypes usertype;
     String name;
     String id;
+    private DishTypes dish;
 
-    public User(String name, String id) {
+    public User(String name, String id, UserTypes usertype, DishTypes dish) {
         this.name = name;
         this.id = id;
+        this.usertype = usertype;
+        this.dish = dish;
     }
     
     public void information(){
@@ -17,7 +22,6 @@ public class User {
         System.out.println("your id is " + this.id);
 }
 
-    
     
     public String getName() {
         return name;
@@ -35,21 +39,29 @@ public class User {
         this.id = id;
     }
     
-    public void buy (){
-        
+    public void buy (int price){
+        if(this.usertype==UserTypes.STUDENT){
+        System.out.println("Your purchase has been made, the total cost is: " + price  );
+        }else if(this.usertype==UserTypes.TEACHER && this.dish==DishTypes.LUNCH){
+        System.out.println("Your purchase has been made, the total cost is: " + ((price) + (price*1/2))  );
+    }else if(this.usertype==UserTypes.TEACHER){
+            System.out.println("Your purchase has been made, the total cost is: " + price);
+    }else{
+            System.out.println("Your purchase has been made, the total cost is: " + price);
+    }
     }
     
-    public void sell(){
-        if(this.types != UserTypes.ADMINISTRATIVE){
-            System.out.println("Usted no está autorizado para vender");
-        }
+    public void sell(int price){
+        System.out.println("you have sold the selected food, fantastic!");
     }
 
     public User(UserTypes types, String name, String id) {
-        this.types = types;
+        this.usertype = types;
         this.name = name;
         this.id = id;
     }
+    
+    
     
     
     

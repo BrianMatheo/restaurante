@@ -14,24 +14,24 @@ public class Restaurante {
         Scanner scanner = new Scanner(System.in);
         String stay = "inside";
         ArrayList<String> arrayList = new ArrayList<>();
-        UserTypes user = null;
+        UserTypes usertype = null;
         while(stay == "inside"){
             System.out.println("what kind of user you are?");
             System.out.println("student");
             System.out.println("teacher");
             System.out.println("administrative");
-            String User = scanner.next();
-            switch(User){
+            String InputTypeUser = scanner.next();
+            switch(InputTypeUser){
                 case "student":
-                user = UserTypes.STUDENT;
+                usertype = UserTypes.STUDENT;
                 stay = "outside";
                 break;
                 case "teacher":
-                user = UserTypes.TEACHER;
+                usertype = UserTypes.TEACHER;
                 stay ="outside";
                 break;
                 case "administrative":
-                user = UserTypes.ADMINISTRATIVE;
+                usertype = UserTypes.ADMINISTRATIVE;
                 stay = "outside";
                 break;
                 default:
@@ -40,26 +40,32 @@ public class Restaurante {
                     break;
         }
         }
-                System.out.println("say your name");
-                String name = scanner.next();
-                System.out.println("say your id");
-                String id = scanner.next();
-                arrayList.add(name);
-                arrayList.add(id);
-                User student = new User(name,id);
-                student.information();
                 
                 Menu menu = new Menu();
                 
                 Dish dish1 = new Dish("Huevos pericos",DishTypes.BREAKFAST,20,2400,DishVariation.OPTION1);
-                Dish dish2 = new Dish("Caldo con Arepa",DishTypes.BREAKFAST,20,2400,DishVariation.OPTION2);
-                Dish dish3 = new Dish("Arroz Chino",DishTypes.LUNCH,20,2400,DishVariation.OPTION1);
+                Dish dish2 = new Dish("Caldo con arepa",DishTypes.BREAKFAST,20,2400,DishVariation.OPTION2);
+                Dish dish3 = new Dish("Empanada de pollo",DishTypes.BREAKFAST,50,2000,DishVariation.OPTION3);
+                Dish dish4 = new Dish("Arroz chino",DishTypes.LUNCH,20,2400,DishVariation.OPTION1);
+                Dish dish5 = new Dish("Pollo broaster",DishTypes.LUNCH,500,2400,DishVariation.OPTION2);
+                Dish dish6 = new Dish("Carne asada",DishTypes.LUNCH,400,2400,DishVariation.OPTION3);
+                Dish dish7 = new Dish("Sushi",DishTypes.DINNER,60,2400,DishVariation.OPTION1);
+                Dish dish8 = new Dish("Pizza",DishTypes.DINNER,40,2400,DishVariation.OPTION2);
+                Dish dish9 = new Dish("Salchipapa",DishTypes.DINNER,30000,14500,DishVariation.OPTION3);
+                int prices = 2400;
                 
                 menu.addDish(dish1);
                 menu.addDish(dish2);
                 menu.addDish(dish3);
+                menu.addDish(dish4);
+                menu.addDish(dish5);
+                menu.addDish(dish6);
+                menu.addDish(dish7);
+                menu.addDish(dish8);
+                menu.addDish(dish9);
                 
                 menu.showMenu();
+                
         stay = "inside";
         DishTypes dish = null;
         while(stay == "inside"){
@@ -87,6 +93,15 @@ public class Restaurante {
                     break;
             }
         }
+        
+                System.out.println("say your name");
+                String name = scanner.next();
+                System.out.println("say your id");
+                String id = scanner.next();
+                arrayList.add(name);
+                arrayList.add(id);
+                User student = new User(name,id,usertype,dish);
+                student.information();
         stay = "inside";
         String options;
         DishVariation variation = null;
@@ -170,7 +185,34 @@ public class Restaurante {
                 }
             }
         }
-        System.out.println(arrayList);
+        stay = "inside";
+        User buyer = new User(name,id,usertype,dish);
+        if(usertype==UserTypes.STUDENT){
+            System.out.println("you are " + UserTypes.STUDENT + " that means you can only buy food");
+            System.out.println("redirected to purchases");
+            buyer.buy(prices);
+        }else if(usertype==UserTypes.TEACHER){
+            System.out.println("you are " + UserTypes.TEACHER + " that means you can only buy food");
+            System.out.println("redirected to purchases");
+            buyer.buy(prices);
+        }else{
+            while(stay=="inside"){
+            System.out.println("you are " + UserTypes.ADMINISTRATIVE + " that means you can select any options");
+            System.out.println("choose buy or sell");
+            String select = scanner.next();
+            switch(select){
+                case "buy":
+                stay="outside";
+                buyer.buy(prices);
+                case "sell":
+                stay="outside";
+                buyer.sell(prices);
+                default:
+                System.out.println("write the correct option");
+                stay="inside";
+                }
+            }
+        }
     }
 }
 
