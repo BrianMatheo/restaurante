@@ -14,6 +14,8 @@ public class Menu {
     }
     
     public void showMenu(){
-        System.out.println(dishList);
+        for (Dish dish : dishList) {
+            System.out.println(dish);
+        }
     }
 }
